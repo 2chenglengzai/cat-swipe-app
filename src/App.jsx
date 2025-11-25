@@ -11,7 +11,6 @@ const CatSwipeApp = () => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Generate unique cat image URLs
   useEffect(() => {
     const catImages = Array.from({ length: CAT_COUNT }, (_, i) => ({
       id: i,
@@ -23,11 +22,9 @@ const CatSwipeApp = () => {
 
   const handleSwipe = (direction) => {
     const currentCat = cats[currentIndex];
-    
     if (direction === 'right') {
       setLikedCats([...likedCats, currentCat]);
     }
-
     if (currentIndex === cats.length - 1) {
       setShowResults(true);
     } else {
@@ -43,10 +40,10 @@ const CatSwipeApp = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black flex items-center justify-center">
+        <div className="text-center text-cyan-400">
           <div className="text-6xl mb-4">🐱</div>
-          <div className="text-xl font-semibold text-gray-700">Loading adorable cats...</div>
+          <div className="text-xl font-semibold">Loading neon cats...</div>
         </div>
       </div>
     );
@@ -54,30 +51,29 @@ const CatSwipeApp = () => {
 
   if (showResults) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black p-4 text-white">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 pt-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">Your Results! 🎉</h1>
-            <p className="text-xl text-gray-600">
-              You liked <span className="font-bold text-pink-600">{likedCats.length}</span> out of {cats.length} cats
+            <h1 className="text-4xl font-bold text-cyan-400 mb-2">Your Neon Results 🎉</h1>
+            <p className="text-xl text-gray-300">
+              You liked <span className="font-bold text-pink-400">{likedCats.length}</span> out of {cats.length} cats
             </p>
           </div>
 
           {likedCats.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">😿</div>
-              <p className="text-xl text-gray-600 mb-6">No cats liked? Maybe you're more of a dog person!</p>
+              <p className="text-xl text-gray-400 mb-6">No cats liked? Maybe neon dogs next time!</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               {likedCats.map((cat) => (
-                <div key={cat.id} className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-                  <img
-                    src={cat.url}
-                    alt={`Liked cat ${cat.id}`}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-2 right-2 bg-pink-500 text-white rounded-full p-2">
+                <div
+                  key={cat.id}
+                  className="relative overflow-hidden rounded-2xl shadow-[0_0_20px_rgba(255,0,255,0.6)] hover:shadow-[0_0_30px_rgba(0,255,255,0.8)] transition-shadow"
+                >
+                  <img src={cat.url} alt={`Liked cat ${cat.id}`} className="w-full h-48 object-cover" />
+                  <div className="absolute top-2 right-2 bg-pink-500 text-white rounded-full p-2 shadow-[0_0_10px_pink]">
                     ❤️
                   </div>
                 </div>
@@ -88,7 +84,7 @@ const CatSwipeApp = () => {
           <div className="text-center">
             <button
               onClick={resetApp}
-              className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+              className="bg-gradient-to-r from-pink-500 to-cyan-500 text-black px-8 py-3 rounded-full font-semibold text-lg shadow-[0_0_15px_cyan] hover:scale-105 transition-transform"
             >
               Try Again! 🐾
             </button>
@@ -99,13 +95,11 @@ const CatSwipeApp = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black flex flex-col text-white">
       {/* Header */}
       <div className="text-center pt-8 pb-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
-          Paws & Preferences 🐱
-        </h1>
-        <p className="text-gray-600">Swipe right to like, left to pass</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">Neon CatSwipe 🐱</h1>
+        <p className="text-gray-400">Swipe right to like, left to pass</p>
         <div className="mt-2 text-sm text-gray-500">
           {currentIndex + 1} / {cats.length}
         </div>
@@ -116,7 +110,6 @@ const CatSwipeApp = () => {
         <div className="relative w-full max-w-sm h-[500px]">
           {cats.map((cat, index) => {
             if (index < currentIndex) return null;
-            
             return (
               <SwipeCard
                 key={cat.id}
@@ -139,13 +132,13 @@ const CatSwipeApp = () => {
         <div className="max-w-sm mx-auto flex justify-center gap-6">
           <button
             onClick={() => handleSwipe('left')}
-            className="bg-white text-red-500 w-16 h-16 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all flex items-center justify-center text-3xl"
+            className="bg-black text-pink-400 w-16 h-16 rounded-full shadow-[0_0_15px_pink] hover:scale-110 transition-transform flex items-center justify-center text-3xl"
           >
             ✕
           </button>
           <button
             onClick={() => handleSwipe('right')}
-            className="bg-white text-green-500 w-16 h-16 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all flex items-center justify-center text-3xl"
+            className="bg-black text-cyan-400 w-16 h-16 rounded-full shadow-[0_0_15px_cyan] hover:scale-110 transition-transform flex items-center justify-center text-3xl"
           >
             ❤
           </button>
@@ -162,7 +155,6 @@ const SwipeCard = ({ cat, isTop, onSwipe, style }) => {
 
   const handleDragEnd = (event, info) => {
     if (!isTop) return;
-
     if (info.offset.x > SWIPE_THRESHOLD) {
       onSwipe('right');
     } else if (info.offset.x < -SWIPE_THRESHOLD) {
@@ -179,7 +171,7 @@ const SwipeCard = ({ cat, isTop, onSwipe, style }) => {
         opacity,
         ...style,
       }}
-      drag={isTop ? "x" : false}
+      drag={isTop ? 'x' : false}
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
       animate={{
@@ -191,27 +183,22 @@ const SwipeCard = ({ cat, isTop, onSwipe, style }) => {
         opacity: { duration: 0.2 },
       }}
     >
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden h-full">
+      <div className="bg-black rounded-3xl shadow-[0_0_20px_rgba(0,255,255,0.6)] overflow-hidden h-full">
         <div className="relative h-full">
-          <img
-            src={cat.url}
-            alt={`Cat ${cat.id}`}
-            className="w-full h-full object-cover"
-            draggable="false"
-          />
-          
+          <img src={cat.url} alt={`Cat ${cat.id}`} className="w-full h-full object-cover" draggable="false" />
+
           {/* Swipe indicators */}
           <motion.div
-            className="absolute top-8 left-8 bg-red-500 text-white px-6 py-3 rounded-lg font-bold text-2xl transform -rotate-12 border-4 border-white"
+            className="absolute top-8 left-8 bg-pink-500 text-white px-6 py-3 rounded-lg font-bold text-2xl transform -rotate-12 border-4 border-black shadow-[0_0_10px_pink]"
             style={{
               opacity: useTransform(x, [-100, 0], [1, 0]),
             }}
           >
             NOPE
           </motion.div>
-          
+
           <motion.div
-            className="absolute top-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg font-bold text-2xl transform rotate-12 border-4 border-white"
+            className="absolute top-8 right-8 bg-cyan-500 text-black px-6 py-3 rounded-lg font-bold text-2xl transform rotate-12 border-4 border-black shadow-[0_0_10px_cyan]"
             style={{
               opacity: useTransform(x, [0, 100], [0, 1]),
             }}
